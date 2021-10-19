@@ -1,0 +1,85 @@
+using System;
+
+namespace GameShow
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random rnd = new Random();
+            int counter = 0;
+            int win = 0;
+            int lose = 0;
+
+
+            
+            while (counter < 100000000)
+            {
+                int choice = rnd.Next(3);
+                int winner = rnd.Next(3);
+                int reveal = 0;
+
+                while (reveal == choice || reveal == winner)
+                {
+                    reveal++;
+                }
+                
+                if (choice ==0 && winner ==1 || choice == 1 && winner == 0)
+                {
+                    reveal = 2;
+                }
+                if (choice == 0 && winner == 2 || choice == 2 && winner == 0)
+                {
+                    reveal = 1;
+                }
+                if (choice == 1 && winner == 2 || choice == 2 && winner == 1)
+                {
+                    reveal = 0;
+                }
+
+                switch(choice)
+                {
+                    case 0:
+                        if (reveal == 1)
+                            choice = 2;
+                        else
+                            choice = 1;
+                        break;
+                    case 1:
+                        if (reveal == 0)
+                            choice = 2;
+                        else
+                            choice = 0;
+                        break;
+                    case 2:
+                        if (reveal == 1)
+                            choice = 0;
+                        else
+                            choice = 1;
+                        break;
+                }
+
+
+
+                counter++;
+                if (choice == winner)
+                {
+                    win++;
+                }
+                if (choice != winner)
+                {
+                    lose++;
+                }
+
+                
+
+            }
+            Console.WriteLine($"Number of plays: {counter}");
+            Console.WriteLine($"Number of wins: {win}");
+            Console.WriteLine($"Number of losses: {lose}");
+
+                
+
+        }
+    }
+}
